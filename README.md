@@ -66,7 +66,7 @@ Este projeto foi construído com as melhores ferramentas do ecossistema moderno:
 Pré-requisitos: Node.js (v18+) e Git.
 
 ### 1. Clone o repositório
-`git clone ainda a ser adicionado`
+`git clone https://github.com/isaac-const/Arcahub.git`
 
 ### 2. Entre na pasta
 `cd arcahub`
