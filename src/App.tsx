@@ -20,6 +20,7 @@ function App() {
   const [rootPath, setRootPath] = useState('')
   const [path, setPath] = useState('')
   const [favorites, setFavorites] = useState<string[]>([])
+  const [isReady, setIsReady] = useState(false)
   
   // --- PROJECT DATA ---
   const [folders, setFolders] = useState<string[]>([])
@@ -45,10 +46,13 @@ function App() {
     const init = async () => {
       const config = await window.electron.getConfig()
       const favs = await window.electron.getFavorites()
-      const initialPath = normalizePath(config.rootPath)
+      const initialPath = normalizePath(config.rootPath || '') 
+      
       setRootPath(initialPath)
       setPath(initialPath)
       setFavorites(favs)
+      
+      setIsReady(true) 
     }
     init()
   }, [])
@@ -90,6 +94,7 @@ function App() {
 
   // 4. WATCH PATH CHANGES
   useEffect(() => {
+    if (!isReady) return
     if (path === '') {
         const loadDrives = async () => {
             const drives = await window.electron.getDrives()
@@ -103,13 +108,17 @@ function App() {
     }
 
     const loadContent = async () => {
-      setFolders([])
-      const resFolders = await window.electron.getFolders(path)
-      if (resFolders.success) setFolders(resFolders.folders)
-      if (path !== rootPath) refreshData(path)
+        setFolders([]) // Limpa visualmente antes de carregar
+        const resFolders = await window.electron.getFolders(path)
+        if (resFolders.success) {
+            setFolders(resFolders.folders)
+        } else {
+            setFolders([]) // Se der erro na leitura (E:/www não existe?), deixa vazio em vez de manter os discos
+        }
+        if (path !== rootPath) refreshData(path)
     }
     loadContent()
-  }, [path, rootPath, refreshData])
+  }, [path, rootPath, refreshData, isReady])
 
   // --- HANDLERS ---
   const handleNavigate = (folder: string) => {
@@ -244,17 +253,26 @@ function App() {
           
           <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <AnimatePresence mode="wait">
-                  {isHome ? (
-                      <motion.div key="home" initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-20}} transition={{duration:0.2}} style={{height:'100%'}}>
-                          <div style={{overflowY:'auto', height:'100%', padding:'30px'}}>
-                              <HomeScreen 
-                                  favorites={favorites} onNavigate={handleNavigate} 
-                                  onUnfavorite={async (p) => setFavorites(await window.electron.toggleFavorite(p))} 
-                              />
-                          </div>
-                      </motion.div>
-                  ) : (
-                      <ProjectDashboard 
+                {/* CENÁRIO 1: HOME (Sua pasta de projetos padrão) */}
+                {isHome ? (
+                    <motion.div key="home" initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} exit={{opacity:0, y:-20}} transition={{duration:0.2}} style={{height:'100%'}}>
+                        <div style={{overflowY:'auto', height:'100%', padding:'30px'}}>
+                            <HomeScreen 
+                                favorites={favorites} onNavigate={handleNavigate} 
+                                onUnfavorite={async (p) => setFavorites(await window.electron.toggleFavorite(p))} 
+                            />
+                        </div>
+                    </motion.div>
+                ) : path === '' ? (
+                    /* CENÁRIO 2: SELEÇÃO DE DISCOS (Raiz do PC) */
+                    <motion.div key="root-select" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} style={{height:'100%', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', color:'#666'}}>
+                        <VscFolderOpened size={64} style={{ opacity: 0.2, marginBottom: 20 }} />
+                        <h2 style={{ margin: '0 0 10px 0', color: 'var(--text-main)' }}>Meu Computador</h2>
+                        <p style={{ margin: 0 }}>Selecione um disco na barra lateral para começar.</p>
+                    </motion.div>
+                ) : (
+                    /* CENÁRIO 3: DASHBOARD DO PROJETO */
+                    <ProjectDashboard 
                         path={path} 
                         folders={folders} 
                         packageData={packageData} 
@@ -274,9 +292,9 @@ function App() {
                         onSyncGit={() => handleGitAction('sync')}
                         onCommitGit={(msg) => handleGitAction('commit', msg)}
                         onRefresh={() => handleNavigate(path)} 
-                      />
-                  )}
-              </AnimatePresence>
+                    />
+                )}
+            </AnimatePresence>
           </div>
 
           {/* TERMINAL FOOTER */}

@@ -57,7 +57,9 @@ const SidebarButton = ({ icon: Icon, label, onClick, shortcut }: { icon: Element
 
 export function Sidebar({ path, folders, favorites, onNavigate, onBack, onToggleFavorite, onGoHome, onOpenDevTools, onOpenSettings }: Props) {
   const [searchTerm, setSearchTerm] = useState('')
-  const currentFolderName = path.split('/').filter(Boolean).pop() || path
+  const currentFolderName = path === '' 
+      ? 'MEU COMPUTADOR' 
+      : path.split('/').filter(Boolean).pop()?.toUpperCase() || 'NAVEGADOR';
 
   const filteredFolders = folders.filter(folder => 
     folder.toLowerCase().includes(searchTerm.toLowerCase())
@@ -98,7 +100,9 @@ export function Sidebar({ path, folders, favorites, onNavigate, onBack, onToggle
         </div>
 
         <div style={{ marginBottom: 10, paddingLeft: 5, fontSize: '11px', fontWeight: 'bold', color: '#555', textTransform: 'uppercase' }}>
-            Navegador ({currentFolderName})
+            <span style={{ fontSize: '11px', fontWeight: 'bold', color: '#666', letterSpacing: '1px' }}>
+                NAVEGADOR ({currentFolderName})
+            </span>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
