@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, shell, dialog } from 'electron'
+import { app, BrowserWindow, ipcMain, shell, dialog, IpcMainInvokeEvent } from 'electron'
 import path from 'path'
 import fs from 'fs'
 import { exec, spawn, ChildProcess } from 'child_process' // Adicionado ChildProcess
@@ -863,7 +863,39 @@ ipcMain.handle('get-drives', async () => {
     })
   })
 })
+// 1. Listar Branches
+ipcMain.handle('git-get-branches', async (_: IpcMainInvokeEvent, folderPath: string) => {
+  try {
+    const { stdout } = await execAsync('git branch --format="%(refname:short)"', { cwd: folderPath })
+    
+    // Filtra linhas vazias e espaços
+    const branches = stdout.split('\n').map((b: string) => b.trim()).filter((b: string) => b.length > 0)
+    
+    return { success: true, branches }
+  } catch (error: unknown) {
+    // Tratamento estrito de erro (unknown -> Error)
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    return { success: false, error: errorMessage, branches: [] }
+  }
+})
 
+// 2. Trocar Branch
+// Definindo interface para o payload
+interface CheckoutPayload {
+    folderPath: string
+    branch: string
+}
+
+ipcMain.handle('git-checkout', async (_: IpcMainInvokeEvent, payload: CheckoutPayload) => {
+  const { folderPath, branch } = payload
+  try {
+    await execAsync(`git checkout "${branch}"`, { cwd: folderPath })
+    return { success: true }
+  } catch (error: unknown) {
+    const errorMessage = error instanceof Error ? error.message : String(error)
+    return { success: false, error: errorMessage }
+  }
+})
 
 app.whenReady().then(createWindow)
 

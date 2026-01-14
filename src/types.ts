@@ -85,6 +85,16 @@ export interface AssetScanResult {
   error?: string
 }
 
+export interface GitBranchResult {
+  success: boolean
+  branches: string[]
+  error?: string
+}
+
+export interface GitCheckoutResult {
+  success: boolean
+  error?: string
+}
 
 
 export type TechStackItem = 

@@ -128,8 +128,12 @@ export function ProjectDashboard({
                         {gitData && (
                             <div style={{ gridColumn: 'span 4' }}>
                                 <GitStatusCard 
-                                    branch={gitData.branch} changes={gitData.changes}
-                                    onSync={onSyncGit} onCommit={onCommitGit}
+                                    branch={gitData.branch} 
+                                    changes={gitData.changes}
+                                    folderPath={path}            
+                                    onBranchChange={onRefresh}   
+                                    onSync={onSyncGit} 
+                                    onCommit={onCommitGit}
                                 />
                             </div>
                         )}

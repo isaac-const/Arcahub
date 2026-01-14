@@ -46,7 +46,9 @@ declare global {
       readImageBase64: (path: string) => Promise<string | null>;
       openExplorer: (path: string) => Promise<void>;
       getDrives: () => Promise<string[]>;
-      
+      gitGetBranches: (folderPath: string) => Promise<{ success: boolean; branches?: string[]; error?: string }>;
+      gitCheckout: (payload: { folderPath: string; branch: string }) => Promise<{ success: boolean; error?: string }>
+
     };
   }
 }

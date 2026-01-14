@@ -62,4 +62,6 @@ contextBridge.exposeInMainWorld('electron', {
   readImageBase64: (path: string) => ipcRenderer.invoke('read-image-base64', path),
   openExplorer: (path: string) => ipcRenderer.invoke('open-explorer', path),
   getDrives: () => ipcRenderer.invoke('get-drives'),
+  gitGetBranches: (folderPath: string) => ipcRenderer.invoke('git-get-branches', folderPath),
+  gitCheckout: (folderPath: string, branch: string) => ipcRenderer.invoke('git-checkout', folderPath, branch),
 })
