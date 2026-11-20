@@ -208,12 +208,12 @@ function App() {
   }, [isDragging, handleMouseMove, handleMouseUp])
 
   // --- RENDER ---
-  if (!rootPath) return <div style={{ background: '#121212', height: '100vh' }} />
+  if (!rootPath) return <div style={{ background: 'var(--bg)', height: '100vh' }} />
   const isHome = path === rootPath
 
   return (
     // MUDANÇA 1: Flex column para acomodar a barra de título
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw', overflow: 'hidden', background: '#121212' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', width: '100vw', overflow: 'hidden', background: 'var(--bg)' }}>
       
       {/* --- NOVA BARRA DE TÍTULO (Title Bar) --- */}
       <div style={{
@@ -222,12 +222,12 @@ function App() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: '#121212',
-          borderBottom: '1px solid #333', 
+          background: 'var(--bg)',
+          borderBottom: '1px solid var(--line)', 
           WebkitAppRegion: 'drag', 
           userSelect: 'none',
           fontSize: '12px',
-          color: '#666',
+          color: 'var(--mut2)',
           flexShrink: 0
       } as React.CSSProperties}>
           <span>Arcahub</span>
@@ -249,7 +249,7 @@ function App() {
         </div>
 
         {/* 2. MAIN AREA */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, borderRight: '1px solid #333', position: 'relative' }}>
+        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, borderRight: '1px solid var(--line)', position: 'relative' }}>
           
           <div style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
               <AnimatePresence mode="wait">
@@ -265,7 +265,7 @@ function App() {
                     </motion.div>
                 ) : path === '' ? (
                     /* CENÁRIO 2: SELEÇÃO DE DISCOS (Raiz do PC) */
-                    <motion.div key="root-select" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} style={{height:'100%', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', color:'#666'}}>
+                    <motion.div key="root-select" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}} style={{height:'100%', display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', color:'var(--mut2)'}}>
                         <VscFolderOpened size={64} style={{ opacity: 0.2, marginBottom: 20 }} />
                         <h2 style={{ margin: '0 0 10px 0', color: 'var(--text-main)' }}>Meu Computador</h2>
                         <p style={{ margin: 0 }}>Selecione um disco na barra lateral para começar.</p>
@@ -301,17 +301,17 @@ function App() {
           {!isHome && (
               <>
                   {!isTerminalOpen && (
-                      <button onClick={() => setIsTerminalOpen(true)} style={{ position: 'absolute', bottom: 25, right: 25, background: 'rgba(30, 30, 30, 0.9)', backdropFilter: 'blur(10px)', border: '1px solid #444', borderRadius: '8px', padding: '10px 16px', color: '#e0e0e0', fontSize: '13px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 8px 20px rgba(0,0,0,0.4)', zIndex: 50, display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <VscTerminal color="#61dafb" /> Abrir Terminal
+                      <button onClick={() => setIsTerminalOpen(true)} style={{ position: 'absolute', bottom: 25, right: 25, background: 'rgba(30, 30, 30, 0.9)', backdropFilter: 'blur(10px)', border: '1px solid var(--line2)', borderRadius: '12px', padding: '10px 16px', color: 'var(--ink)', fontSize: '13px', fontWeight: 600, cursor: 'pointer', boxShadow: '0 8px 20px rgba(0,0,0,0.4)', zIndex: 50, display: 'flex', alignItems: 'center', gap: 8 }}>
+                          <VscTerminal color="var(--acc)" /> Abrir Terminal
                       </button>
                   )}
                   {isTerminalOpen && (
-                    <div style={{ borderTop: '1px solid #333', background: '#000' }}>
-                      <div onMouseDown={() => setIsDragging(true)} style={{ height: '4px', background: '#252526', cursor: 'row-resize', borderTop: '1px solid #333' }} onMouseEnter={e => e.currentTarget.style.background = '#007acc'} onMouseLeave={e => e.currentTarget.style.background = '#252526'} />
+                    <div style={{ borderTop: '1px solid var(--line)', background: '#000' }}>
+                      <div onMouseDown={() => setIsDragging(true)} style={{ height: '4px', background: 'var(--card)', cursor: 'row-resize', borderTop: '1px solid var(--line)' }} onMouseEnter={e => e.currentTarget.style.background = 'var(--acc)'} onMouseLeave={e => e.currentTarget.style.background = 'var(--card)'} />
                       <div style={{ height: `${terminalHeight}px`, position: 'relative' }}>
                           <div style={{ position: 'absolute', top: 5, right: 15, zIndex: 20, display: 'flex', gap: 10 }}>
-                              <button onClick={() => setTerminalHeight(500)} title="Expandir" style={{ background: 'transparent', border: 'none', color: '#666', cursor: 'pointer' }}><VscChevronUp/></button>
-                              <button onClick={() => setIsTerminalOpen(false)} title="Fechar" style={{ background: 'transparent', border: 'none', color: '#666', cursor: 'pointer' }}><VscChromeClose/></button>
+                              <button onClick={() => setTerminalHeight(500)} title="Expandir" style={{ background: 'transparent', border: 'none', color: 'var(--mut2)', cursor: 'pointer' }}><VscChevronUp/></button>
+                              <button onClick={() => setIsTerminalOpen(false)} title="Fechar" style={{ background: 'transparent', border: 'none', color: 'var(--mut2)', cursor: 'pointer' }}><VscChromeClose/></button>
                           </div>
                           <TerminalPanel cwd={path} />
                       </div>
@@ -340,16 +340,16 @@ function App() {
       {/* MODAL SETTINGS */}
       {showSettings && (
         <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.7)', zIndex: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <div style={{ width: '500px', background: '#1e1e1e', border: '1px solid #333', borderRadius: '16px', padding: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}>
+            <div style={{ width: '500px', background: 'var(--panel)', border: '1px solid var(--line)', borderRadius: '16px', padding: '30px', boxShadow: '0 20px 50px rgba(0,0,0,0.5)' }}>
                 <h2 style={{ margin: '0 0 20px 0', fontSize: '20px' }}>Configurações</h2>
                 <div style={{ marginBottom: 20 }}>
-                    <label style={{ display: 'block', marginBottom: 10, color: '#888', fontSize: '14px' }}>Pasta Raiz</label>
+                    <label style={{ display: 'block', marginBottom: 10, color: 'var(--mut)', fontSize: '14px' }}>Pasta Raiz</label>
                     <div style={{ display: 'flex', gap: 10 }}>
-                        <input value={rootPath} readOnly style={{ flex: 1, padding: '10px', borderRadius: '6px', border: '1px solid #444', background: '#252526', color: '#ccc' }} />
-                        <button onClick={handleChangeRoot} style={{ padding: '0 15px', background: '#007acc', border: 'none', borderRadius: '6px', color: '#fff', cursor: 'pointer' }}><VscFolderOpened /> Alterar</button>
+                        <input value={rootPath} readOnly style={{ flex: 1, padding: '10px', borderRadius: '10px', border: '1px solid var(--line2)', background: 'var(--card)', color: 'var(--ink2)' }} />
+                        <button onClick={handleChangeRoot} style={{ padding: '0 15px', background: 'linear-gradient(135deg, var(--acc) 0%, var(--acc2) 100%)', border: 'none', borderRadius: '10px', color: '#fff', cursor: 'pointer' }}><VscFolderOpened /> Alterar</button>
                     </div>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}><button onClick={() => setShowSettings(false)} style={{ padding: '10px 20px', background: 'transparent', border: '1px solid #444', borderRadius: '6px', color: '#ccc', cursor: 'pointer' }}>Fechar</button></div>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}><button onClick={() => setShowSettings(false)} style={{ padding: '10px 20px', background: 'transparent', border: '1px solid var(--line2)', borderRadius: '10px', color: 'var(--ink2)', cursor: 'pointer' }}>Fechar</button></div>
             </div>
         </div>
       )}

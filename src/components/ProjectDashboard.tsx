@@ -61,7 +61,7 @@ export function ProjectDashboard({
         {/* --- HEADER --- */}
         <div className="app-header" style={{ 
             padding: '0 20px', 
-            borderBottom: '1px solid #333', 
+            borderBottom: '1px solid var(--line)', 
             height: '50px', 
             display: 'flex', 
             alignItems: 'center', 
@@ -70,33 +70,33 @@ export function ProjectDashboard({
             WebkitAppRegion: 'drag' 
         } as React.CSSProperties}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 15, WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
-                <div style={{ fontWeight: 'bold', color: '#e0e0e0', fontSize: '14px' }}>
+                <div style={{ fontWeight: 'bold', color: 'var(--ink)', fontSize: '14px' }}>
                     {path.split(/[/\\]/).pop()}
                 </div>
 
                 <div style={{ display: 'flex', gap: 4 }}>
                     <motion.button 
-                        whileHover={{ scale: 1.1, backgroundColor: '#252526' }}
+                        whileHover={{ scale: 1.1, backgroundColor: 'var(--card)' }}
                         whileTap={{ scale: 0.9 }}
                         onClick={onRefresh}
                         title="Atualizar dados"
-                        style={{ background: 'transparent', border: 'none', color: '#888', cursor: 'pointer', padding: '4px', borderRadius: '4px', display: 'flex' }}
+                        style={{ background: 'transparent', border: 'none', color: 'var(--mut)', cursor: 'pointer', padding: '4px', borderRadius: '8px', display: 'flex' }}
                     >
                         <VscRefresh size={16} />
                     </motion.button>
                     <motion.button 
-                        whileHover={{ scale: 1.1, backgroundColor: '#252526' }}
+                        whileHover={{ scale: 1.1, backgroundColor: 'var(--card)' }}
                         whileTap={{ scale: 0.9 }}
                         onClick={handleOpenExplorer}
                         title="Abrir no Explorer"
-                        style={{ background: 'transparent', border: 'none', color: '#888', cursor: 'pointer', padding: '4px', borderRadius: '4px', display: 'flex' }}
+                        style={{ background: 'transparent', border: 'none', color: 'var(--mut)', cursor: 'pointer', padding: '4px', borderRadius: '8px', display: 'flex' }}
                     >
                         <VscFolderOpened size={16} />
                     </motion.button>
                 </div>
             </div>
 
-            <div style={{ display: 'flex', background: '#121212', padding: 3, borderRadius: 6, WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
+            <div style={{ display: 'flex', background: 'var(--bg)', padding: 3, borderRadius: 10, WebkitAppRegion: 'no-drag' } as React.CSSProperties}>
                 <TabButton 
                     label="Visão Geral" icon={VscFiles} 
                     active={activeTab === 'files'} onClick={() => setActiveTab('files')} 
@@ -142,24 +142,24 @@ export function ProjectDashboard({
                             {packageData?.scripts && Object.keys(packageData.scripts).length > 0 ? (
                                 <ScriptsCard scripts={packageData.scripts} onRun={onRunScript} />
                             ) : (
-                                <div style={{ padding: 30, background: '#1e1e1e', borderRadius: 16, border: '1px solid #333', color: '#666', textAlign: 'center', height: '100%' }}>
+                                <div style={{ padding: 30, background: 'var(--panel)', borderRadius: 16, border: '1px solid var(--line)', color: 'var(--mut2)', textAlign: 'center', height: '100%' }}>
                                     Nenhum script npm encontrado.
                                 </div>
                             )}
                         </div>
 
-                        <div style={{ gridColumn: 'span 12', background: '#1e1e1e', border: '1px solid #333', borderRadius: 16, padding: 20 }}>
-                            <h3 style={{marginTop:0, color:'#888', fontSize:'12px', marginBottom:15, textTransform:'uppercase'}}>Arquivos e Pastas</h3>
+                        <div style={{ gridColumn: 'span 12', background: 'var(--panel)', border: '1px solid var(--line)', borderRadius: 16, padding: 20 }}>
+                            <h3 style={{marginTop:0, color:'var(--mut)', fontSize:'12px', marginBottom:15, textTransform:'uppercase'}}>Arquivos e Pastas</h3>
                             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: 10 }}>
                                 {folders.map(file => (
                                     <motion.div 
                                         key={file} 
-                                        whileHover={{ scale: 1.05, backgroundColor: '#252526', y: -2 }}
+                                        whileHover={{ scale: 1.05, backgroundColor: 'var(--card)', y: -2 }}
                                         onClick={() => onNavigate(file)} 
-                                        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', padding: 10, borderRadius: 6, transition: '0.2s' }}
+                                        style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', cursor: 'pointer', padding: 10, borderRadius: 10, transition: '0.2s' }}
                                     >
-                                        {file.includes('.') ? <VscFileCode size={32} color="#ccc"/> : <VscFolder size={32} color="#007acc"/>}
-                                        <span style={{ fontSize: '11px', color: '#ccc', marginTop: 5, textAlign:'center', wordBreak:'break-all' }}>{file}</span>
+                                        {file.includes('.') ? <VscFileCode size={32} color="var(--ink2)"/> : <VscFolder size={32} color="var(--acc)"/>}
+                                        <span style={{ fontSize: '11px', color: 'var(--ink2)', marginTop: 5, textAlign:'center', wordBreak:'break-all' }}>{file}</span>
                                     </motion.div>
                                 ))}
                             </div>
@@ -200,13 +200,13 @@ interface TabButtonProps {
 
 const TabButton = ({ label, icon: Icon, active, onClick }: TabButtonProps) => (
     <motion.button 
-        whileHover={{ backgroundColor: active ? '#333' : '#1e1e1e' }}
+        whileHover={{ backgroundColor: active ? 'var(--line)' : 'var(--panel)' }}
         whileTap={{ scale: 0.95 }}
         onClick={onClick}
         style={{ 
-            background: active ? '#333' : 'transparent', 
-            color: active ? '#fff' : '#666', 
-            border: 'none', padding: '6px 12px', borderRadius: 4, 
+            background: active ? 'var(--line)' : 'transparent', 
+            color: active ? '#fff' : 'var(--mut2)', 
+            border: 'none', padding: '6px 12px', borderRadius: 8, 
             cursor: 'pointer', fontSize: '12px', display: 'flex', alignItems: 'center', gap: 6, transition: '0.1s'
         }}
     >

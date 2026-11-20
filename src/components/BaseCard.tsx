@@ -11,13 +11,13 @@ interface Props {
 export function BaseCard({ title, icon, children, action, style }: Props) {
   return (
     <div style={{ 
-      background: 'linear-gradient(145deg, #1e1e1e 0%, #181818 100%)', 
+      background: 'linear-gradient(160deg, var(--card) 0%, var(--panel) 100%)', 
       borderRadius: '16px', 
-      border: '1px solid #333', 
+      border: '1px solid var(--line)', 
       height: '100%', 
       display: 'flex', 
       flexDirection: 'column',
-      boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+      boxShadow: '0 18px 40px -24px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.04)',
       overflow: 'hidden',
       position: 'relative',
       ...style 
@@ -33,8 +33,8 @@ export function BaseCard({ title, icon, children, action, style }: Props) {
           alignItems: 'center',
           borderBottom: '1px solid rgba(255,255,255,0.03)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#e0e0e0', fontWeight: 600, fontSize: '15px' }}>
-            {icon && <span style={{ color: '#61dafb', display: 'flex' }}>{icon}</span>}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: 'var(--ink)', fontWeight: 600, fontSize: '15px' }}>
+            {icon && <span style={{ color: 'var(--acc)', display: 'flex' }}>{icon}</span>}
             {title}
           </div>
           {action && <div style={{ display: 'flex', alignItems: 'center' }}>{action}</div>}

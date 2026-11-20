@@ -37,7 +37,7 @@ export function HeroCard({
         whileTap={{ scale: 0.8 }}
         onClick={(e) => { e.stopPropagation(); onToggleFavorite() }}
         title={isFavorite ? "Remover dos Favoritos" : "Adicionar aos Favoritos"}
-        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: isFavorite ? '#ffd700' : '#444', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }}
+        style={{ background: 'transparent', border: 'none', cursor: 'pointer', color: isFavorite ? '#ffd700' : 'var(--line2)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 5 }}
       >
         {isFavorite ? <VscStarFull size={20} /> : <VscStarEmpty size={20} />}
       </motion.button>
@@ -51,9 +51,9 @@ export function HeroCard({
         title={isTerminalOpen ? "Ocultar Terminal" : "Mostrar Terminal"}
         style={{ 
           background: isTerminalOpen ? 'rgba(255,255,255,0.1)' : 'transparent', 
-          border: '1px solid rgba(255,255,255,0.2)', borderRadius: '6px', padding: '0 12px',
+          border: '1px solid rgba(255,255,255,0.2)', borderRadius: '10px', padding: '0 12px',
           height: '32px', display: 'flex', alignItems: 'center', gap: 6,
-          cursor: 'pointer', color: '#e0e0e0', fontSize: '12px', fontWeight: 500
+          cursor: 'pointer', color: 'var(--ink)', fontSize: '12px', fontWeight: 500
         }}
       >
         <VscTerminal size={16} /> 
@@ -61,15 +61,15 @@ export function HeroCard({
       </motion.button>
 
       <motion.button 
-        whileHover={{ scale: 1.05, boxShadow: '0 4px 10px rgba(0,122,204,0.4)' }}
+        whileHover={{ scale: 1.05, boxShadow: '0 4px 10px rgba(91,140,255,0.4)' }}
         whileTap={{ scale: 0.95 }}
         onClick={onOpenCode}
         title="Abrir no VS Code"
         style={{ 
-          background: '#007acc', border: 'none', borderRadius: '6px', padding: '0 12px', 
+          background: 'linear-gradient(135deg, var(--acc) 0%, var(--acc2) 100%)', border: 'none', borderRadius: '10px', padding: '0 12px', 
           height: '32px', display: 'flex', alignItems: 'center', gap: 6, 
           cursor: 'pointer', color: '#fff', fontWeight: 600, fontSize: '12px',
-          boxShadow: '0 2px 5px rgba(0,122,204,0.4)'
+          boxShadow: '0 2px 5px rgba(91,140,255,0.4)'
         }}
       >
         <VscVscode size={16} /> 
@@ -84,13 +84,13 @@ export function HeroCard({
       icon={<FaCube size={18} />} 
       action={HeaderActions}
       style={{
-        background: 'linear-gradient(135deg, #1e252e 0%, #121212 100%)',
-        border: '1px solid #007acc40',
-        boxShadow: '0 8px 32px rgba(0, 122, 204, 0.1)'
+        background: 'linear-gradient(135deg, #1e252e 0%, var(--bg) 100%)',
+        border: '1px solid color-mix(in oklab, var(--acc) 40%, transparent)',
+        boxShadow: '0 8px 32px rgba(91,140,255, 0.1)'
       }}
     >
       <div style={{ display: 'flex', flexDirection: 'column', gap: 15 }}>
-        <p style={{ margin: 0, color: '#aaa', fontSize: '14px', lineHeight: 1.6 }}>
+        <p style={{ margin: 0, color: 'var(--mut3)', fontSize: '14px', lineHeight: 1.6 }}>
           {description}
         </p>
         
@@ -103,7 +103,7 @@ export function HeroCard({
                     whileHover={{ scale: 1.05, backgroundColor: 'rgba(40, 167, 69, 0.2)' }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => onRunScript('dev')} 
-                    style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: '6px', border: '1px solid rgba(40, 167, 69, 0.3)', background: 'rgba(40, 167, 69, 0.1)', color: '#28a745', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
+                    style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: '10px', border: '1px solid rgba(40, 167, 69, 0.3)', background: 'rgba(40, 167, 69, 0.1)', color: 'var(--ok)', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
                 >
                     <VscPlay size={14} /> Run Dev
                 </motion.button>
@@ -113,7 +113,7 @@ export function HeroCard({
                     whileHover={{ scale: 1.05, backgroundColor: 'rgba(255, 159, 67, 0.2)' }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() => onRunScript('build')} 
-                    style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: '6px', border: '1px solid rgba(255, 159, 67, 0.3)', background: 'rgba(255, 159, 67, 0.1)', color: '#ff9f43', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
+                    style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: '10px', border: '1px solid rgba(255, 159, 67, 0.3)', background: 'rgba(255, 159, 67, 0.1)', color: '#ff9f43', fontSize: '12px', fontWeight: 600, cursor: 'pointer' }}
                 >
                     <VscBeaker size={14} /> Build
                 </motion.button>

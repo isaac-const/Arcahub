@@ -24,26 +24,26 @@ export function ScriptsCard({ scripts, onRun }: Props) {
               border: '1px solid transparent',
               transition: '0.2s'
             }}
-            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = '#444' }}
+            onMouseEnter={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.06)'; e.currentTarget.style.borderColor = 'var(--line2)' }}
             onMouseLeave={e => { e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; e.currentTarget.style.borderColor = 'transparent' }}
           >
             <div style={{ overflow: 'hidden', marginRight: 10 }}>
-                <div style={{ fontWeight: 600, color: '#e0e0e0', fontSize: '13px', marginBottom: 2 }}>{name}</div>
-                <div style={{ fontSize: '11px', color: '#666', fontFamily: 'monospace', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{command}</div>
+                <div style={{ fontWeight: 600, color: 'var(--ink)', fontSize: '13px', marginBottom: 2 }}>{name}</div>
+                <div style={{ fontSize: '11px', color: 'var(--mut2)', fontFamily: 'monospace', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{command}</div>
             </div>
             
             <button 
                 onClick={() => onRun(name)}
                 title={`Rodar: ${name}`}
                 style={{ 
-                    background: '#252526', border: '1px solid #444', 
-                    borderRadius: '8px', width: '32px', height: '32px', 
+                    background: 'var(--card)', border: '1px solid var(--line2)', 
+                    borderRadius: '12px', width: '32px', height: '32px', 
                     display: 'flex', alignItems: 'center', justifyContent: 'center', 
-                    cursor: 'pointer', color: '#61dafb', flexShrink: 0,
+                    cursor: 'pointer', color: 'var(--acc)', flexShrink: 0,
                     transition: '0.2s'
                 }}
-                onMouseEnter={e => { e.currentTarget.style.background = '#007acc'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = '#007acc' }}
-                onMouseLeave={e => { e.currentTarget.style.background = '#252526'; e.currentTarget.style.color = '#61dafb'; e.currentTarget.style.borderColor = '#444' }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'var(--acc)'; e.currentTarget.style.color = '#fff'; e.currentTarget.style.borderColor = 'var(--acc)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'var(--card)'; e.currentTarget.style.color = 'var(--acc)'; e.currentTarget.style.borderColor = 'var(--line2)' }}
             >
                 <VscPlay size={14} />
             </button>

@@ -17,25 +17,25 @@ interface ColumnProps {
 }
 
 const Column = ({ title, status, color, tasks, onMove, onDelete }: ColumnProps) => (
-    <div style={{ flex: 1, background: '#1e1e1e', borderRadius: 8, border: '1px solid #333', display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div style={{ padding: 15, borderBottom: '1px solid #333', display: 'flex', alignItems: 'center', gap: 10, fontWeight: 'bold', color: '#e0e0e0' }}>
+    <div style={{ flex: 1, background: 'var(--panel)', borderRadius: 12, border: '1px solid var(--line)', display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <div style={{ padding: 15, borderBottom: '1px solid var(--line)', display: 'flex', alignItems: 'center', gap: 10, fontWeight: 'bold', color: 'var(--ink)' }}>
         <VscCircleFilled color={color} /> {title} 
-        <span style={{ background: '#333', padding: '2px 8px', borderRadius: 10, fontSize: '11px', color: '#aaa' }}>
+        <span style={{ background: 'var(--line)', padding: '2px 8px', borderRadius: 10, fontSize: '11px', color: 'var(--mut3)' }}>
           {tasks.length}
         </span>
       </div>
       
       <div style={{ flex: 1, padding: 10, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: 10 }}>
         {tasks.map(t => (
-          <div key={t.id} style={{ background: '#252526', padding: 12, borderRadius: 6, border: '1px solid #333', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>
+          <div key={t.id} style={{ background: 'var(--card)', padding: 12, borderRadius: 10, border: '1px solid var(--line)', boxShadow: '0 2px 4px rgba(0,0,0,0.2)' }}>
             <div style={{ marginBottom: 10, fontSize: '14px', lineHeight: '1.4' }}>{t.text}</div>
             
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                <div style={{ display: 'flex', gap: 5 }}>
-                 {status !== 'todo' && <button onClick={() => onMove(t.id, 'prev')} title="Voltar" style={{ background: '#333', border: 'none', color: '#ccc', borderRadius: 4, padding: 4, cursor: 'pointer' }}><VscChevronLeft /></button>}
-                 {status !== 'done' && <button onClick={() => onMove(t.id, 'next')} title="Avançar" style={{ background: '#333', border: 'none', color: '#ccc', borderRadius: 4, padding: 4, cursor: 'pointer' }}><VscChevronRight /></button>}
+                 {status !== 'todo' && <button onClick={() => onMove(t.id, 'prev')} title="Voltar" style={{ background: 'var(--line)', border: 'none', color: 'var(--ink2)', borderRadius: 8, padding: 4, cursor: 'pointer' }}><VscChevronLeft /></button>}
+                 {status !== 'done' && <button onClick={() => onMove(t.id, 'next')} title="Avançar" style={{ background: 'var(--line)', border: 'none', color: 'var(--ink2)', borderRadius: 8, padding: 4, cursor: 'pointer' }}><VscChevronRight /></button>}
                </div>
-               <button onClick={() => onDelete(t.id)} style={{ background: 'transparent', border: 'none', color: '#666', cursor: 'pointer' }}><VscTrash /></button>
+               <button onClick={() => onDelete(t.id)} style={{ background: 'transparent', border: 'none', color: 'var(--mut2)', cursor: 'pointer' }}><VscTrash /></button>
             </div>
           </div>
         ))}
@@ -102,9 +102,9 @@ export function KanbanBoard({ projectPath }: Props) {
           onChange={e => setNewTask(e.target.value)} 
           onKeyDown={e => e.key === 'Enter' && handleAdd()}
           placeholder="Adicionar nova tarefa..." 
-          style={{ flex: 1, padding: '10px', borderRadius: 6, border: '1px solid #333', background: '#1e1e1e', color: '#fff', outline: 'none' }}
+          style={{ flex: 1, padding: '10px', borderRadius: 10, border: '1px solid var(--line)', background: 'var(--panel)', color: '#fff', outline: 'none' }}
         />
-        <button onClick={handleAdd} style={{ padding: '0 20px', background: '#007acc', color: '#fff', border: 'none', borderRadius: 6, cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: 5 }}>
+        <button onClick={handleAdd} style={{ padding: '0 20px', background: 'linear-gradient(135deg, var(--acc) 0%, var(--acc2) 100%)', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: 5 }}>
           <VscAdd /> Adicionar
         </button>
       </div>

@@ -31,17 +31,17 @@ export function PortHunter() {
   return (
     <div>
         <div style={{textAlign:'right', marginBottom:10}}>
-            <button onClick={loadPorts} disabled={loadingPorts} style={{background:'transparent', border:'1px solid #444', color:'#ccc', padding:'5px 10px', borderRadius:4, display:'inline-flex', alignItems:'center', gap:5, cursor:'pointer'}}>
+            <button onClick={loadPorts} disabled={loadingPorts} style={{background:'transparent', border:'1px solid var(--line2)', color:'var(--ink2)', padding:'5px 10px', borderRadius: 8, display:'inline-flex', alignItems:'center', gap:5, cursor:'pointer'}}>
                 <VscRefresh className={loadingPorts ? 'spin' : ''}/> Atualizar
             </button>
         </div>
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px' }}>
-            <thead><tr style={{ background: '#252526', color: '#aaa', textAlign:'left' }}><th style={{padding:10}}>Porta</th><th>PID</th><th>Processo</th><th>Ação</th></tr></thead>
+            <thead><tr style={{ background: 'var(--card)', color: 'var(--mut3)', textAlign:'left' }}><th style={{padding:10}}>Porta</th><th>PID</th><th>Processo</th><th>Ação</th></tr></thead>
             <tbody>
                 {ports.map(p => (
-                    <tr key={p.pid} style={{borderBottom:'1px solid #333'}}>
-                        <td style={{padding:10, color:'#61dafb'}}>:{p.port}</td><td style={{color:'#888'}}>{p.pid}</td><td>{p.processName}</td>
-                        <td><button onClick={() => handleKillPort(p.pid)} style={{background:'#333', border:'none', color:'#ff6b6b', padding:'4px 8px', borderRadius:4, cursor:'pointer'}}>Matar</button></td>
+                    <tr key={p.pid} style={{borderBottom:'1px solid var(--line)'}}>
+                        <td style={{padding:10, color:'var(--acc)'}}>:{p.port}</td><td style={{color:'var(--mut)'}}>{p.pid}</td><td>{p.processName}</td>
+                        <td><button onClick={() => handleKillPort(p.pid)} style={{background:'var(--line)', border:'none', color:'#ff6b6b', padding:'4px 8px', borderRadius: 8, cursor:'pointer'}}>Matar</button></td>
                     </tr>
                 ))}
             </tbody>

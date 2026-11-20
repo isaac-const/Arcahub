@@ -21,8 +21,8 @@ export function TerminalPanel({ cwd }: Props) {
     // 1. Configuração do Xterm.js
     const term = new Terminal({
       theme: {
-        background: '#0F0F0F',
-        foreground: '#CCCCCC',
+        background: '#0a0c11',
+        foreground: '#c8d0df',
         cursor: '#61dafb',
         selectionBackground: 'rgba(97, 218, 251, 0.3)',
       },
@@ -115,10 +115,10 @@ export function TerminalPanel({ cwd }: Props) {
   }
 
   return (
-    <div style={{ background: '#0F0F0F', display: 'flex', flexDirection: 'column', height: '100%', width: '100%', overflow: 'hidden' }}>
+    <div style={{ background: '#0a0c11', display: 'flex', flexDirection: 'column', height: '100%', width: '100%', overflow: 'hidden' }}>
       
       {/* Header */}
-      <div style={{ padding: '5px 15px', background: '#1e1e1e', color: '#ccc', fontSize: '12px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid #333' }}>
+      <div style={{ padding: '5px 15px', background: '#10131a', color: '#c8d0df', fontSize: '12px', display: 'flex', alignItems: 'center', gap: 8, borderBottom: '1px solid #232a37' }}>
         <FaTerminal /> Terminal Local
       </div>
 
@@ -129,7 +129,7 @@ export function TerminalPanel({ cwd }: Props) {
       />
 
       {/* Input de Comando */}
-      <form onSubmit={handleSend} style={{ display: 'flex', background: '#1e1e1e', borderTop: '1px solid #333', padding: '5px' }}>
+      <form onSubmit={handleSend} style={{ display: 'flex', background: '#10131a', borderTop: '1px solid #232a37', padding: '5px' }}>
         <span style={{ padding: '0 10px', color: '#61dafb', fontWeight: 'bold', alignSelf: 'center', fontSize: '12px' }}>PS</span>
         <input 
           ref={inputRef}

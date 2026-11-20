@@ -9,7 +9,7 @@ import { BaseCard } from './BaseCard'
 const SEMANTIC_TYPES = [
   { id: 'feat', label: 'Feat', color: '#a9ff68', desc: 'Nova funcionalidade', placeholder: 'Ex: Adicionar botão de login...' },
   { id: 'fix', label: 'Fix', color: '#ff6b6b', desc: 'Correção de bug', placeholder: 'Ex: Corrigir erro na validação...' },
-  { id: 'docs', label: 'Docs', color: '#61dafb', desc: 'Documentação', placeholder: 'Ex: Atualizar README...' },
+  { id: 'docs', label: 'Docs', color: 'var(--acc)', desc: 'Documentação', placeholder: 'Ex: Atualizar README...' },
   { id: 'style', label: 'Style', color: '#ff9f43', desc: 'Formatação, estilos', placeholder: 'Ex: Ajustar indentação no header...' },
   { id: 'refactor', label: 'Refactor', color: '#bd93f9', desc: 'Refatoração', placeholder: 'Ex: Simplificar lógica de autenticação...' },
   { id: 'test', label: 'Test', color: '#f8f8f2', desc: 'Testes', placeholder: 'Ex: Adicionar testes unitários...' },
@@ -122,11 +122,11 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
     <motion.button 
       onClick={handleSync}
       disabled={isSyncing}
-      whileHover={{ scale: 1.2, color: '#007acc' }}
+      whileHover={{ scale: 1.2, color: 'var(--acc)' }}
       whileTap={{ scale: 0.9 }}
       title="Sincronizar (Pull & Push)"
       style={{ 
-        background: 'transparent', border: 'none', color: isSyncing ? '#007acc' : '#888', 
+        background: 'transparent', border: 'none', color: isSyncing ? 'var(--acc)' : 'var(--mut)', 
         cursor: isSyncing ? 'default' : 'pointer', display: 'flex', alignItems: 'center' 
       }}
     >
@@ -143,7 +143,7 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
           
           {/* LINHA DA BRANCH */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ color: '#888', fontSize: '13px' }}>Branch</span>
+            <span style={{ color: 'var(--mut)', fontSize: '13px' }}>Branch</span>
             
             <div style={{ position: 'relative' }}>
                 <motion.button 
@@ -153,10 +153,10 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
                     whileTap={{ scale: 0.95 }}
                     style={{ 
                         display: 'flex', alignItems: 'center', gap: 6, 
-                        background: '#1e1e1e', 
-                        border: '1px solid #333',
-                        padding: '4px 10px', borderRadius: '4px', 
-                        fontSize: '12px', color: '#007acc', cursor: 'pointer',
+                        background: 'var(--panel)', 
+                        border: '1px solid var(--line)',
+                        padding: '4px 10px', borderRadius: '8px', 
+                        fontSize: '12px', color: 'var(--acc)', cursor: 'pointer',
                         minWidth: '100px', justifyContent: 'center'
                     }}
                 >
@@ -182,9 +182,9 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
                                     width: '180px', 
                                     maxHeight: '200px', 
                                     overflowY: 'auto',
-                                    background: '#1e1e1e',
-                                    border: '1px solid #333',
-                                    borderRadius: '8px',
+                                    background: 'var(--panel)',
+                                    border: '1px solid var(--line)',
+                                    borderRadius: '12px',
                                     boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
                                     zIndex: 100,
                                     padding: '5px',
@@ -192,7 +192,7 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
                                 }}
                             >
                                 {isLoadingBranches ? (
-                                    <div style={{ padding: 10, textAlign: 'center', color: '#888', fontSize: '11px' }}>
+                                    <div style={{ padding: 10, textAlign: 'center', color: 'var(--mut)', fontSize: '11px' }}>
                                         <VscLoading className="spin"/> Carregando...
                                     </div>
                                 ) : (
@@ -202,13 +202,13 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
                                             onClick={() => handleSwitchBranch(b)}
                                             style={{
                                                 display: 'flex', alignItems: 'center', gap: 8, padding: '8px',
-                                                background: b === branch ? '#252526' : 'transparent',
-                                                border: 'none', borderRadius: '4px', cursor: 'pointer', textAlign: 'left',
-                                                color: b === branch ? '#007acc' : '#e0e0e0',
+                                                background: b === branch ? 'var(--card)' : 'transparent',
+                                                border: 'none', borderRadius: '8px', cursor: 'pointer', textAlign: 'left',
+                                                color: b === branch ? 'var(--acc)' : 'var(--ink)',
                                                 fontSize: '12px'
                                             }}
-                                            onMouseEnter={(e) => e.currentTarget.style.background = '#252526'}
-                                            onMouseLeave={(e) => e.currentTarget.style.background = b === branch ? '#252526' : 'transparent'}
+                                            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--card)'}
+                                            onMouseLeave={(e) => e.currentTarget.style.background = b === branch ? 'var(--card)' : 'transparent'}
                                         >
                                             {/* Substituído VscGitBranch por VscGitMerge para garantir que existe */}
                                             <VscGitMerge size={14} style={{ opacity: b === branch ? 1 : 0.4 }} />
@@ -225,8 +225,8 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
           </div>
 
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ color: '#888', fontSize: '13px' }}>Pendentes</span>
-            <span style={{ color: changes > 0 ? '#ff6b6b' : '#28a745', fontWeight: 'bold', fontSize: '13px' }}>
+            <span style={{ color: 'var(--mut)', fontSize: '13px' }}>Pendentes</span>
+            <span style={{ color: changes > 0 ? '#ff6b6b' : 'var(--ok)', fontWeight: 'bold', fontSize: '13px' }}>
               {changes} arquivos
             </span>
           </div>
@@ -239,12 +239,12 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
                     <motion.button 
                         onClick={() => setShowTypeMenu(!showTypeMenu)} 
                         style={{ 
-                            height: '100%', background: '#252526', border: '1px solid #333', borderRadius: '6px', 
+                            height: '100%', background: 'var(--card)', border: '1px solid var(--line)', borderRadius: '10px', 
                             padding: '0 8px', display: 'flex', alignItems: 'center', gap: 5, cursor: 'pointer', 
                             color: selectedType.color, fontSize: '11px', fontWeight: 'bold', minWidth: '70px', justifyContent: 'space-between' 
                         }}
                     >
-                        {selectedType.label} <VscChevronDown color="#888" size={10} />
+                        {selectedType.label} <VscChevronDown color="var(--mut)" size={10} />
                     </motion.button>
 
                     <AnimatePresence>
@@ -258,8 +258,8 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
                                     className="custom-scrollbar" 
                                     style={{ 
                                         position: 'absolute', bottom: '110%', left: 0, width: '230px', maxHeight: '220px', 
-                                        overflowY: 'auto', background: '#1e1e1e', border: '1px solid #333', 
-                                        borderRadius: '8px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', zIndex: 100, 
+                                        overflowY: 'auto', background: 'var(--panel)', border: '1px solid var(--line)', 
+                                        borderRadius: '12px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)', zIndex: 100, 
                                         padding: '5px', display: 'flex', flexDirection: 'column', gap: 2 
                                     }}
                                 >
@@ -270,16 +270,16 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
                                             title={type.desc} 
                                             style={{ 
                                                 display: 'flex', alignItems: 'center', gap: 8, padding: '8px', 
-                                                background: selectedType.id === type.id ? '#252526' : 'transparent', 
-                                                border: 'none', borderRadius: '4px', cursor: 'pointer', textAlign: 'left', flexShrink: 0 
+                                                background: selectedType.id === type.id ? 'var(--card)' : 'transparent', 
+                                                border: 'none', borderRadius: '8px', cursor: 'pointer', textAlign: 'left', flexShrink: 0 
                                             }} 
-                                            onMouseEnter={(e) => e.currentTarget.style.background = '#252526'} 
-                                            onMouseLeave={(e) => e.currentTarget.style.background = selectedType.id === type.id ? '#252526' : 'transparent'}
+                                            onMouseEnter={(e) => e.currentTarget.style.background = 'var(--card)'} 
+                                            onMouseLeave={(e) => e.currentTarget.style.background = selectedType.id === type.id ? 'var(--card)' : 'transparent'}
                                         >
                                             <VscCircleFilled color={type.color} size={8} style={{ flexShrink: 0 }} />
                                             <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                                <span style={{ color: '#e0e0e0', fontSize: '12px', fontWeight: 'bold' }}>{type.label}</span>
-                                                <span style={{ color: '#888', fontSize: '10px', lineHeight: '1.2' }}>{type.desc}</span>
+                                                <span style={{ color: 'var(--ink)', fontSize: '12px', fontWeight: 'bold' }}>{type.label}</span>
+                                                <span style={{ color: 'var(--mut)', fontSize: '10px', lineHeight: '1.2' }}>{type.desc}</span>
                                             </div>
                                         </button>
                                     ))}
@@ -296,18 +296,18 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
                     placeholder={selectedType.placeholder} 
                     disabled={isCommitting} 
                     style={{ 
-                        flex: 1, background: '#252526', border: '1px solid #333', 
-                        borderRadius: '6px', padding: '6px 10px', color: '#e0e0e0', fontSize: '12px', outline: 'none' 
+                        flex: 1, background: 'var(--card)', border: '1px solid var(--line)', 
+                        borderRadius: '10px', padding: '6px 10px', color: 'var(--ink)', fontSize: '12px', outline: 'none' 
                     }} 
                 />
                 <motion.button 
                     onClick={handleCommit} 
                     disabled={!commitMsg || isCommitting} 
-                    whileHover={{ scale: 1.1, backgroundColor: '#28a745' }} 
+                    whileHover={{ scale: 1.1, backgroundColor: 'var(--ok)' }} 
                     whileTap={{ scale: 0.9 }} 
                     title="Commit (Enter)" 
                     style={{ 
-                        background: '#28a745', border: 'none', borderRadius: '6px', width: 32, 
+                        background: 'var(--ok)', border: 'none', borderRadius: '10px', width: 32, 
                         display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', 
                         cursor: 'pointer', opacity: !commitMsg ? 0.5 : 1 
                     }}
@@ -317,7 +317,7 @@ export function GitStatusCard({ branch, changes, folderPath, onSync, onCommit, o
             </div>
         )}
 
-        <style>{`.spin { animation: spin 1s linear infinite; } @keyframes spin { 100% { transform: rotate(360deg); } } .custom-scrollbar::-webkit-scrollbar { width: 6px; } .custom-scrollbar::-webkit-scrollbar-track { background: transparent; } .custom-scrollbar::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; } .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #555; }`}</style>
+        <style>{`.spin { animation: spin 1s linear infinite; } @keyframes spin { 100% { transform: rotate(360deg); } } .custom-scrollbar::-webkit-scrollbar { width: 6px; } .custom-scrollbar::-webkit-scrollbar-track { background: transparent; } .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; } .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: var(--line3); }`}</style>
       </div>
     </BaseCard>
   )

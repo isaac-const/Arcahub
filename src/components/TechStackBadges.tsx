@@ -56,7 +56,7 @@ export function TechStackBadges({ stack }: Props) {
               borderRadius: '20px',
               fontSize: '11px',
               fontWeight: 600,
-              color: '#e0e0e0',
+              color: 'var(--ink)',
               cursor: 'default',
               userSelect: 'none'
             }}

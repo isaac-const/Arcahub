@@ -68,20 +68,20 @@ export function GitPainter() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 15, fontSize: '13px' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2px', padding: '10px', background: '#0d1117', borderRadius: '6px', border: '1px solid #30363d', maxHeight: '120px', overflowY: 'hidden', overflowX: 'auto' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '2px', padding: '10px', background: '#0d1117', borderRadius: '10px', border: '1px solid #30363d', maxHeight: '120px', overflowY: 'hidden', overflowX: 'auto' }}>
             {previewData.map((day, i) => {
-                let bg = '#161b22'; if (day.level === 1) bg = '#0e4429'; if (day.level === 2) bg = '#006d32'; if (day.level === 3) bg = '#26a641'; if (day.level === 4) bg = '#39d353';
+                let bg = 'var(--card)'; if (day.level === 1) bg = '#0e4429'; if (day.level === 2) bg = '#006d32'; if (day.level === 3) bg = '#26a641'; if (day.level === 4) bg = '#39d353';
                 return <div key={i} style={{ width: '10px', height: '10px', background: bg, borderRadius: '2px' }} />
             })}
         </div>
-        <div style={{display:'flex', gap:10}}><input value={painterPath} readOnly placeholder="Selecione um repo..." style={{flex:1, padding:8, background:'#252526', border:'1px solid #333', borderRadius:6, color:'#fff'}} /><button onClick={async () => {const p = await window.electron.selectFolder(); if(p) setPainterPath(p)}} style={{padding:'0 15px', background:'#333', border:'none', borderRadius:6, color:'#fff'}}><VscFolderOpened /></button></div>
+        <div style={{display:'flex', gap:10}}><input value={painterPath} readOnly placeholder="Selecione um repo..." style={{flex:1, padding:8, background:'var(--card)', border:'1px solid var(--line)', borderRadius: 10, color:'#fff'}} /><button onClick={async () => {const p = await window.electron.selectFolder(); if(p) setPainterPath(p)}} style={{padding:'0 15px', background:'var(--line)', border:'none', borderRadius: 10, color:'#fff'}}><VscFolderOpened /></button></div>
         <div style={{ display: 'flex', gap: 20 }}>
-            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} style={{flex:1, padding:8, background:'#252526', border:'1px solid #333', borderRadius:6, color:'#fff'}} />
-            <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} style={{flex:1, padding:8, background:'#252526', border:'1px solid #333', borderRadius:6, color:'#fff'}} />
+            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)} style={{flex:1, padding:8, background:'var(--card)', border:'1px solid var(--line)', borderRadius: 10, color:'#fff'}} />
+            <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)} style={{flex:1, padding:8, background:'var(--card)', border:'1px solid var(--line)', borderRadius: 10, color:'#fff'}} />
         </div>
-        <div><label style={{color:'#aaa'}}>Intensidade: {Math.round(intensity * 100)}%</label><input type="range" min="0" max="1" step="0.05" value={intensity} onChange={e => setIntensity(parseFloat(e.target.value))} style={{width:'100%'}} /></div>
-        <div><label style={{color:'#aaa'}}>Fator Fim de Semana: {Math.round(weekendFactor * 100)}%</label><input type="range" min="0" max="1" step="0.05" value={weekendFactor} onChange={e => setWeekendFactor(parseFloat(e.target.value))} style={{width:'100%'}} /></div>
-        <button onClick={handleRunPainter} disabled={painterLoading} style={{marginTop:10, padding:12, background:'#007acc', border:'none', borderRadius:6, color:'#fff', fontWeight:'bold', cursor:'pointer'}}>{painterLoading ? 'Gerando...' : 'Pintar'}</button>
+        <div><label style={{color:'var(--mut3)'}}>Intensidade: {Math.round(intensity * 100)}%</label><input type="range" min="0" max="1" step="0.05" value={intensity} onChange={e => setIntensity(parseFloat(e.target.value))} style={{width:'100%'}} /></div>
+        <div><label style={{color:'var(--mut3)'}}>Fator Fim de Semana: {Math.round(weekendFactor * 100)}%</label><input type="range" min="0" max="1" step="0.05" value={weekendFactor} onChange={e => setWeekendFactor(parseFloat(e.target.value))} style={{width:'100%'}} /></div>
+        <button onClick={handleRunPainter} disabled={painterLoading} style={{marginTop:10, padding:12, background:'var(--acc)', border:'none', borderRadius: 10, color:'#fff', fontWeight:'bold', cursor:'pointer'}}>{painterLoading ? 'Gerando...' : 'Pintar'}</button>
     </div>
   )
 }

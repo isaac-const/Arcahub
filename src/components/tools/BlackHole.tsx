@@ -20,15 +20,15 @@ export function BlackHole() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-        <div style={{ background: '#252526', padding: 15, borderRadius: 8, border: '1px solid #333', display:'flex', gap:10 }}>
-            <input value={bhPath} readOnly placeholder="Selecione pasta raiz..." style={{ flex: 1, background: '#1e1e1e', border: '1px solid #444', color: '#fff', padding: '8px', borderRadius: 4 }} />
-            <button onClick={async () => {const p = await window.electron.selectFolder(); if(p) setBhPath(p)}} style={{ background: '#333', color: '#fff', border: 'none', padding: '0 15px', borderRadius: 4 }}><VscFolderOpened/></button>
-            <button onClick={handleScanBH} disabled={isScanning} style={{ background: '#007acc', color: '#fff', border: 'none', padding: '0 20px', borderRadius: 4 }}>{isScanning ? '...' : 'Scan'}</button>
+        <div style={{ background: 'var(--card)', padding: 15, borderRadius: 12, border: '1px solid var(--line)', display:'flex', gap:10 }}>
+            <input value={bhPath} readOnly placeholder="Selecione pasta raiz..." style={{ flex: 1, background: 'var(--panel)', border: '1px solid var(--line2)', color: '#fff', padding: '8px', borderRadius: 8 }} />
+            <button onClick={async () => {const p = await window.electron.selectFolder(); if(p) setBhPath(p)}} style={{ background: 'var(--line)', color: '#fff', border: 'none', padding: '0 15px', borderRadius: 8 }}><VscFolderOpened/></button>
+            <button onClick={handleScanBH} disabled={isScanning} style={{ background: 'linear-gradient(135deg, var(--acc) 0%, var(--acc2) 100%)', color: '#fff', border: 'none', padding: '0 20px', borderRadius: 8 }}>{isScanning ? '...' : 'Scan'}</button>
         </div>
         {scannedFolders.map((item, idx) => (
-            <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', background: '#121212', border: '1px solid #333', borderRadius: 6 }}>
-                <div style={{color:'#ccc', fontSize:'13px'}}>{item.path}</div>
-                <div style={{display:'flex', gap:10}}><span style={{color:'#ff6b6b'}}>{item.size}</span><button onClick={() => handleDeleteFolder(item.path)} style={{color:'#ff6b6b', background:'transparent', border:'1px solid #ff6b6b', borderRadius:4}}>DEL</button></div>
+            <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px', background: 'var(--bg)', border: '1px solid var(--line)', borderRadius: 10 }}>
+                <div style={{color:'var(--ink2)', fontSize:'13px'}}>{item.path}</div>
+                <div style={{display:'flex', gap:10}}><span style={{color:'#ff6b6b'}}>{item.size}</span><button onClick={() => handleDeleteFolder(item.path)} style={{color:'#ff6b6b', background:'transparent', border:'1px solid #ff6b6b', borderRadius: 8}}>DEL</button></div>
             </div>
         ))}
     </div>

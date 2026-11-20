@@ -34,7 +34,7 @@ export function GithubCard({ url, onSave, onOpen }: Props) {
       <motion.button 
         whileHover={{ scale: 1.2, color: '#fff' }}
         onClick={handleStartEdit} 
-        style={{ background: 'transparent', border: 'none', color: '#666', cursor: 'pointer', fontSize: '12px' }} 
+        style={{ background: 'transparent', border: 'none', color: 'var(--mut2)', cursor: 'pointer', fontSize: '12px' }} 
         title="Editar Link"
       >
         <FaPen />
@@ -51,37 +51,37 @@ export function GithubCard({ url, onSave, onOpen }: Props) {
             onChange={e => setTempUrl(e.target.value)} 
             placeholder="github.com/usuario/repo" 
             autoFocus
-            style={{ flex: 1, padding: '10px', borderRadius: '8px', border: '1px solid #444', background: '#121212', color: '#fff' }} 
+            style={{ flex: 1, padding: '10px', borderRadius: '12px', border: '1px solid var(--line2)', background: 'var(--bg)', color: '#fff' }} 
           />
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleSave} style={{ background: '#28a745', border: 'none', padding: '0 15px', color: '#fff', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}>Salvar</motion.button>
-          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleCancel} style={{ background: '#333', border: '1px solid #555', padding: '0 15px', color: '#ff6b6b', borderRadius: '8px', cursor: 'pointer' }}><FaTimes /></motion.button>
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleSave} style={{ background: 'var(--ok)', border: 'none', padding: '0 15px', color: '#fff', borderRadius: '12px', cursor: 'pointer', fontWeight: 'bold' }}>Salvar</motion.button>
+          <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} onClick={handleCancel} style={{ background: 'var(--line)', border: '1px solid var(--line3)', padding: '0 15px', color: '#ff6b6b', borderRadius: '12px', cursor: 'pointer' }}><FaTimes /></motion.button>
         </div>
       ) : (
         url ? (
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
              <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                 <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#333', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                 <div style={{ width: 40, height: 40, borderRadius: '50%', background: 'var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     <FaGithub size={24} color="#fff" />
                  </div>
                  <div style={{ display: 'flex', flexDirection: 'column' }}>
                      <span style={{ fontWeight: 600, color: '#fff' }}>GitHub</span>
-                     <span style={{ fontSize: '12px', color: '#888' }}>{url.replace('https://github.com/', '')}</span>
+                     <span style={{ fontSize: '12px', color: 'var(--mut)' }}>{url.replace('https://github.com/', '')}</span>
                  </div>
              </div>
              
              <motion.button 
-                whileHover={{ scale: 1.05, backgroundColor: '#333' }}
+                whileHover={{ scale: 1.05, backgroundColor: 'var(--line)' }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onOpen(url)} 
-                style={{ background: '#252526', border: '1px solid #444', padding: '8px 16px', color: '#e0e0e0', borderRadius: '6px', cursor: 'pointer', fontSize: '13px', fontWeight: 500 }}
+                style={{ background: 'var(--card)', border: '1px solid var(--line2)', padding: '8px 16px', color: 'var(--ink)', borderRadius: '10px', cursor: 'pointer', fontSize: '13px', fontWeight: 500 }}
             >
                 Acessar
              </motion.button>
           </div>
         ) : (
-            <div style={{ textAlign: 'center', padding: '20px 0', color: '#666', fontStyle: 'italic' }}>
+            <div style={{ textAlign: 'center', padding: '20px 0', color: 'var(--mut2)', fontStyle: 'italic' }}>
                 <p style={{ margin: 0, marginBottom: 10 }}>Nenhum repositório vinculado.</p>
-                <motion.button whileHover={{ scale: 1.05 }} onClick={handleStartEdit} style={{ background: '#007acc', border: 'none', padding: '8px 16px', borderRadius: '6px', color: '#fff', cursor: 'pointer', fontSize: '12px' }}>Vincular Agora</motion.button>
+                <motion.button whileHover={{ scale: 1.05 }} onClick={handleStartEdit} style={{ background: 'linear-gradient(135deg, var(--acc) 0%, var(--acc2) 100%)', border: 'none', padding: '8px 16px', borderRadius: '10px', color: '#fff', cursor: 'pointer', fontSize: '12px' }}>Vincular Agora</motion.button>
             </div>
         )
       )}
